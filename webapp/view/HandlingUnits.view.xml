@@ -1,0 +1,79 @@
+<mvc:View controllerName="hupackingfiori.controller.HandlingUnits"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page id="huPage"
+        title="Handling Units"
+        showNavButton="true"
+        navButtonPress=".onBack">
+
+        <subHeader>
+            <Bar>
+                <contentLeft>
+                    <Label text="Delivery: {appModel>/deliveryNumber}" design="Bold" class="sapUiSmallMarginBegin" />
+                </contentLeft>
+                <contentRight>
+                    <ObjectStatus
+                        text="{= ${/to_HandlingUnit}.length + ' HU(s)'}"
+                        state="Information"
+                        class="sapUiSmallMarginEnd" />
+                </contentRight>
+            </Bar>
+        </subHeader>
+
+        <content>
+            <List id="huList"
+                items="{path: 'to_HandlingUnit'}"
+                noDataText="No handling units found for this delivery."
+                growing="true"
+                growingThreshold="20"
+                mode="None"
+                busyIndicatorDelay="0">
+
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Handling Unit List" level="H4" />
+                    </Toolbar>
+                </headerToolbar>
+
+                <items>
+                    <ObjectListItem
+                        title="{HandlingUnitNumber}"
+                        intro="{Material} — Item {DeliveryItem}"
+                        number="{GrossWeight}"
+                        numberUnit="{WeightUnit}"
+                        type="Inactive">
+
+                        <attributes>
+                            <ObjectAttribute title="Packaging" text="{PackagingMaterial}" />
+                            <ObjectAttribute title="Volume" text="{Volume} {VolumeUnit}" />
+                            <ObjectAttribute title="Quantity" text="{Quantity} {QuantityUnit}" />
+                        </attributes>
+
+                        <firstStatus>
+                            <ObjectStatus
+                                text="{PackingStatus}"
+                                state="{= ${PackingStatus} === 'C' ? 'Success' : 'Warning'}" />
+                        </firstStatus>
+
+                    </ObjectListItem>
+                </items>
+
+            </List>
+        </content>
+
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    text="Back"
+                    type="Default"
+                    icon="sap-icon://nav-back"
+                    press=".onBack" />
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+
+</mvc:View>

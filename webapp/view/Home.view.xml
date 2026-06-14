@@ -1,0 +1,56 @@
+<mvc:View controllerName="hupackingfiori.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:VerticalLayout width="100%" class="sapUiMediumMarginTop">
+                <f:SimpleForm 
+                    layout="ResponsiveGridLayout"
+                    editable="true"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="2"
+                    labelSpanS="12"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    class="sapuiResponsivePadding">
+
+                    <f:content>
+                        <Label text="Delivery" required="true" labelFor="deliveryInput"/>
+                        <Input 
+                          id="deliveryInput"
+                          maxLength="10"
+                          width="35%"
+                          type="Number"
+                          value="{appModel>/deliveryNumber}"
+                          valueLiveUpdate="true"/>
+                    </f:content>
+
+                </f:SimpleForm>
+            </l:VerticalLayout>
+        </content>
+
+        <footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <Button 
+                  text="Clear"
+                  type="Default"
+                  press=".onClear"
+                />
+                <Button 
+                  text="Next"
+                  type="Emphasized"
+                  press=".onNext"
+                />                
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

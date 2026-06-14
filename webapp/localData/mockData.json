@@ -1,0 +1,254 @@
+{
+  "deliveries": {
+    "1000000001": {
+      "deliveryNumber": "1000000001",
+      "shipTo": "Customer A - Paris",
+      "handlingUnits": [
+        {
+          "huNumber": "HU-100001",
+          "type": "Pallet",
+          "weight": "320 kg",
+          "volume": "1.2 m³",
+          "quantity": 48,
+          "material": "MAT-001",
+          "description": "Industrial Valves",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-100002",
+          "type": "Pallet",
+          "weight": "280 kg",
+          "volume": "1.0 m³",
+          "quantity": 36,
+          "material": "MAT-002",
+          "description": "Pipe Fittings",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-100003",
+          "type": "Box",
+          "weight": "15 kg",
+          "volume": "0.08 m³",
+          "quantity": 10,
+          "material": "MAT-003",
+          "description": "Gasket Sets",
+          "status": "Open"
+        },
+        {
+          "huNumber": "HU-100004",
+          "type": "Box",
+          "weight": "22 kg",
+          "volume": "0.12 m³",
+          "quantity": 20,
+          "material": "MAT-004",
+          "description": "O-Ring Kits",
+          "status": "Open"
+        }
+      ]
+    },
+    "1000000002": {
+      "deliveryNumber": "1000000002",
+      "shipTo": "Customer B - Lyon",
+      "handlingUnits": [
+        {
+          "huNumber": "HU-200001",
+          "type": "Crate",
+          "weight": "540 kg",
+          "volume": "2.5 m³",
+          "quantity": 60,
+          "material": "MAT-010",
+          "description": "Steel Beams",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-200002",
+          "type": "Crate",
+          "weight": "510 kg",
+          "volume": "2.4 m³",
+          "quantity": 60,
+          "material": "MAT-010",
+          "description": "Steel Beams",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-200003",
+          "type": "Pallet",
+          "weight": "190 kg",
+          "volume": "0.9 m³",
+          "quantity": 24,
+          "material": "MAT-011",
+          "description": "Anchor Bolts",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-200004",
+          "type": "Box",
+          "weight": "8 kg",
+          "volume": "0.05 m³",
+          "quantity": 5,
+          "material": "MAT-012",
+          "description": "Safety Harnesses",
+          "status": "Open"
+        },
+        {
+          "huNumber": "HU-200005",
+          "type": "Envelope",
+          "weight": "0.3 kg",
+          "volume": "0.001 m³",
+          "quantity": 1,
+          "material": "MAT-099",
+          "description": "Compliance Docs",
+          "status": "Open"
+        }
+      ]
+    },
+    "1000000003": {
+      "deliveryNumber": "1000000003",
+      "shipTo": "Customer C - Marseille",
+      "handlingUnits": [
+        {
+          "huNumber": "HU-300001",
+          "type": "Drum",
+          "weight": "200 kg",
+          "volume": "0.22 m³",
+          "quantity": 1,
+          "material": "MAT-020",
+          "description": "Hydraulic Oil",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-300002",
+          "type": "Drum",
+          "weight": "200 kg",
+          "volume": "0.22 m³",
+          "quantity": 1,
+          "material": "MAT-020",
+          "description": "Hydraulic Oil",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-300003",
+          "type": "Box",
+          "weight": "12 kg",
+          "volume": "0.06 m³",
+          "quantity": 8,
+          "material": "MAT-021",
+          "description": "Filter Elements",
+          "status": "Open"
+        }
+      ]
+    },
+    "1000000004": {
+      "deliveryNumber": "1000000004",
+      "shipTo": "Customer D - Bordeaux",
+      "handlingUnits": [
+        {
+          "huNumber": "HU-400001",
+          "type": "Pallet",
+          "weight": "410 kg",
+          "volume": "1.6 m³",
+          "quantity": 80,
+          "material": "MAT-030",
+          "description": "Electrical Panels",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-400002",
+          "type": "Box",
+          "weight": "9 kg",
+          "volume": "0.04 m³",
+          "quantity": 6,
+          "material": "MAT-031",
+          "description": "Circuit Breakers",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-400003",
+          "type": "Box",
+          "weight": "6 kg",
+          "volume": "0.03 m³",
+          "quantity": 4,
+          "material": "MAT-032",
+          "description": "Cable Conduits",
+          "status": "Open"
+        },
+        {
+          "huNumber": "HU-400004",
+          "type": "Envelope",
+          "weight": "0.2 kg",
+          "volume": "0.001 m³",
+          "quantity": 1,
+          "material": "MAT-099",
+          "description": "Wiring Diagrams",
+          "status": "Open"
+        }
+      ]
+    },
+    "1000000005": {
+      "deliveryNumber": "1000000005",
+      "shipTo": "Customer E - Dakar",
+      "handlingUnits": [
+        {
+          "huNumber": "HU-500001",
+          "type": "Pallet",
+          "weight": "350 kg",
+          "volume": "1.4 m³",
+          "quantity": 50,
+          "material": "MAT-040",
+          "description": "Pump Units",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-500002",
+          "type": "Pallet",
+          "weight": "300 kg",
+          "volume": "1.2 m³",
+          "quantity": 40,
+          "material": "MAT-041",
+          "description": "Motor Assemblies",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-500003",
+          "type": "Box",
+          "weight": "18 kg",
+          "volume": "0.09 m³",
+          "quantity": 12,
+          "material": "MAT-042",
+          "description": "Coupling Kits",
+          "status": "Open"
+        },
+        {
+          "huNumber": "HU-500004",
+          "type": "Box",
+          "weight": "5 kg",
+          "volume": "0.03 m³",
+          "quantity": 3,
+          "material": "MAT-043",
+          "description": "Impeller Seals",
+          "status": "Open"
+        },
+        {
+          "huNumber": "HU-500005",
+          "type": "Crate",
+          "weight": "600 kg",
+          "volume": "3.0 m³",
+          "quantity": 2,
+          "material": "MAT-044",
+          "description": "Compressor Units",
+          "status": "Packed"
+        },
+        {
+          "huNumber": "HU-500006",
+          "type": "Envelope",
+          "weight": "0.4 kg",
+          "volume": "0.001 m³",
+          "quantity": 1,
+          "material": "MAT-099",
+          "description": "Customs Documents",
+          "status": "Open"
+        }
+      ]
+    }
+  }
+}

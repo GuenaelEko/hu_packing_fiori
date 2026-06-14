@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Sun Jun 14 2026 08:02:03 GMT+0000 (Greenwich Mean Time)",
+    "generatorPlatform": "Visual Studio Code",
+    "serviceType": "None",
+    "metadataFilename": "",
+    "serviceUrl": "N/A",
+    "appName": "hu_packing_fiori",
+    "appTitle": "HU Packing",
+    "appDescription": "Handling Units Packing",
+    "appNamespace": "",
+    "ui5Theme": "sap_fiori_3",
+    "ui5Version": "1.149.0",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": false,
+    "generatorVersion": "1.20.0",
+    "template": "Basic",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
