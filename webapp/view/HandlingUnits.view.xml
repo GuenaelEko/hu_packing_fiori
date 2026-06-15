@@ -13,12 +13,6 @@
                 <contentLeft>
                     <Label text="Delivery: {appModel>/deliveryNumber}" design="Bold" class="sapUiSmallMarginBegin" />
                 </contentLeft>
-                <contentRight>
-                    <ObjectStatus
-                        text="{= ${/to_HandlingUnit}.length + ' HU(s)'}"
-                        state="Information"
-                        class="sapUiSmallMarginEnd" />
-                </contentRight>
             </Bar>
         </subHeader>
 
@@ -39,23 +33,24 @@
 
                 <items>
                     <ObjectListItem
-                        title="{HandlingUnitNumber}"
-                        intro="{Material} — Item {DeliveryItem}"
+                        title="{ExternalHandlingUnitID}"
+                        intro="Int. HU Number - {HandlingUnitNumber}"
                         number="{GrossWeight}"
                         numberUnit="{WeightUnit}"
                         type="Inactive">
 
                         <attributes>
+                            <ObjectAttribute title="HU Description" text="{HandlingUnitDescription}" />
                             <ObjectAttribute title="Packaging" text="{PackagingMaterial}" />
                             <ObjectAttribute title="Volume" text="{Volume} {VolumeUnit}" />
-                            <ObjectAttribute title="Quantity" text="{Quantity} {QuantityUnit}" />
+                            <!-- <ObjectAttribute title="Quantity" text="{Quantity} {QuantityUnit}" /> -->
                         </attributes>
 
-                        <firstStatus>
+                        <!-- <firstStatus>
                             <ObjectStatus
                                 text="{PackingStatus}"
                                 state="{= ${PackingStatus} === 'C' ? 'Success' : 'Warning'}" />
-                        </firstStatus>
+                        </firstStatus> -->
 
                     </ObjectListItem>
                 </items>
