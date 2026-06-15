@@ -39,6 +39,19 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_z_ui_delivery.zc_handling_unit_itemType">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Handling Unit Item"/>
+                        <PropertyValue Property="TypeNamePlural" String="Handling Unit Items"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Material"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_z_ui_delivery.zc_outbound_deliveryType">
                 <Annotation Term="UI.HeaderInfo">
                     <Record>

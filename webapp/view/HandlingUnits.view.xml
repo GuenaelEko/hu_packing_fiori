@@ -37,7 +37,8 @@
                         intro="Int. HU Number - {HandlingUnitNumber}"
                         number="{GrossWeight}"
                         numberUnit="{WeightUnit}"
-                        type="Inactive">
+                        type="Active"
+                        press=".onHUPress">
 
                         <attributes>
                             <ObjectAttribute title="HU Description" text="{HandlingUnitDescription}" />

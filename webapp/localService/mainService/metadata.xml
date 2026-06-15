@@ -54,12 +54,22 @@
                 <Property Name="Volume" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="VolumeUnit" sap:label="Total Volume" sap:quickinfo="Total Volume of Handling Unit"/>
                 <Property Name="VolumeUnit" Type="Edm.String" MaxLength="3" sap:label="Volume Unit" sap:semantics="unit-of-measure"/>
                 <Property Name="TareWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="VolumeUnit" sap:label="Tare Weight" sap:quickinfo="Tare Weight of Handling Unit"/>
+                <NavigationProperty Name="to_Item" Relationship="cds_z_ui_delivery.assoc_3D597B9456080CE762DF7122137247E1" FromRole="FromRole_assoc_3D597B9456080CE762DF7122137247E1" ToRole="ToRole_assoc_3D597B9456080CE762DF7122137247E1"/>
+                <NavigationProperty Name="to_Delivery" Relationship="cds_z_ui_delivery.assoc_CC84719D7CB615134F23C006740849C9" FromRole="ToRole_assoc_CC84719D7CB615134F23C006740849C9" ToRole="FromRole_assoc_CC84719D7CB615134F23C006740849C9"/>
+            </EntityType>
+            <EntityType Name="zc_handling_unit_itemType" sap:label="Handling Unit Item - Consumption View" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HandlingUnitNumber"/>
+                    <PropertyRef Name="HandlingUnitItemNumber"/>
+                </Key>
+                <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Internal HU number" sap:quickinfo="Internal Handling Unit Number"/>
+                <Property Name="HandlingUnitItemNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="HU item" sap:quickinfo="Handling Unit Item"/>
                 <Property Name="DeliveryNumber" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Delivery"/>
                 <Property Name="DeliveryItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Delivery Item"/>
                 <Property Name="Material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="QuantityUnit" sap:label="Packed Quantity" sap:quickinfo="Base Quantity Packed in the Handling Unit Item"/>
                 <Property Name="QuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Handling unit UoM" sap:quickinfo="Base Unit of Measure of the Quantity to be Packed (VEMNG)" sap:semantics="unit-of-measure"/>
-                <NavigationProperty Name="to_Delivery" Relationship="cds_z_ui_delivery.assoc_CC84719D7CB615134F23C006740849C9" FromRole="ToRole_assoc_CC84719D7CB615134F23C006740849C9" ToRole="FromRole_assoc_CC84719D7CB615134F23C006740849C9"/>
+                <NavigationProperty Name="to_HandlingUnit" Relationship="cds_z_ui_delivery.assoc_3D597B9456080CE762DF7122137247E1" FromRole="ToRole_assoc_3D597B9456080CE762DF7122137247E1" ToRole="FromRole_assoc_3D597B9456080CE762DF7122137247E1"/>
             </EntityType>
             <EntityType Name="zc_outbound_deliveryType" sap:label="Outbound delivery - Consumption View" sap:content-version="1">
                 <Key>
@@ -320,6 +330,20 @@
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
+            <Association Name="assoc_3D597B9456080CE762DF7122137247E1" sap:content-version="1">
+                <End Type="cds_z_ui_delivery.zc_handling_unitsType" Multiplicity="1" Role="FromRole_assoc_3D597B9456080CE762DF7122137247E1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Type="cds_z_ui_delivery.zc_handling_unit_itemType" Multiplicity="*" Role="ToRole_assoc_3D597B9456080CE762DF7122137247E1"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_3D597B9456080CE762DF7122137247E1">
+                        <PropertyRef Name="HandlingUnitNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_3D597B9456080CE762DF7122137247E1">
+                        <PropertyRef Name="HandlingUnitNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
             <EntityContainer Name="cds_z_ui_delivery_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
                 <EntitySet Name="SAP__Currencies" EntityType="cds_z_ui_delivery.SAP__Currency" sap:content-version="1"/>
                 <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_z_ui_delivery.SAP__UnitOfMeasure" sap:content-version="1"/>
@@ -334,6 +358,7 @@
                 <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_z_ui_delivery.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_z_ui_delivery.SAP__ValueHelp" sap:content-version="1"/>
                 <EntitySet Name="zc_handling_units" EntityType="cds_z_ui_delivery.zc_handling_unitsType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="zc_handling_unit_item" EntityType="cds_z_ui_delivery.zc_handling_unit_itemType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="zc_outbound_delivery" EntityType="cds_z_ui_delivery.zc_outbound_deliveryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <AssociationSet Name="to_FooterSet" Association="cds_z_ui_delivery.to_Footer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Footer"/>
@@ -363,6 +388,10 @@
                     <End EntitySet="zc_outbound_delivery" Role="FromRole_assoc_CC84719D7CB615134F23C006740849C9"/>
                     <End EntitySet="zc_handling_units" Role="ToRole_assoc_CC84719D7CB615134F23C006740849C9"/>
                 </AssociationSet>
+                <AssociationSet Name="assoc_3D597B9456080CE762DF7122137247E1" Association="cds_z_ui_delivery.assoc_3D597B9456080CE762DF7122137247E1" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zc_handling_units" Role="FromRole_assoc_3D597B9456080CE762DF7122137247E1"/>
+                    <End EntitySet="zc_handling_unit_item" Role="ToRole_assoc_3D597B9456080CE762DF7122137247E1"/>
+                </AssociationSet>
                 <AssociationSet Name="to_coverpageSet" Association="cds_z_ui_delivery.to_coverpage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
                     <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
@@ -376,8 +405,29 @@
             <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
+            <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType/to_Item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Composition"/>
+            </Annotations>
             <Annotations Target="cds_z_ui_delivery.zc_outbound_deliveryType/to_HandlingUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.Composition"/>
+            </Annotations>
+            <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_unit_item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_HandlingUnit"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_units" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.NavigationRestrictions">
@@ -386,6 +436,14 @@
                             <Collection>
                                 <Record>
                                     <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Delivery"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Item"/>
                                     <PropertyValue Property="InsertRestrictions">
                                         <Record>
                                             <PropertyValue Property="Insertable" Bool="false"/>

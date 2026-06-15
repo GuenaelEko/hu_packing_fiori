@@ -18,7 +18,7 @@ server:
         backend:
           - path: /sap/opu/odata/sap/Z_UI_DELIVERY_O2
             url: https://mmc-s4sap06.mmc.1stbasis.com:44300
-            client: '100'
+            client: "100"
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -29,4 +29,4 @@ server:
       afterMiddleware: fiori-tools-appreload
       configuration:
         flp:
-          theme: sap_fiori_3
+          theme: sap_horizon

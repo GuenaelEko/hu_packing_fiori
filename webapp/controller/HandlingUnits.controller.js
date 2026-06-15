@@ -34,5 +34,20 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
     onBack() {
       this.getOwnerComponent().getRouter().navTo("RouteHome");
     },
+
+    onHUPress(oEvent) {
+      let oItem = oEvent.getSource();
+      let oContext = oItem.getBindingContext();
+      let sHandlingUnitNumber = oContext.getProperty("HandlingUnitNumber");
+
+      this.getOwnerComponent()
+        .getRouter()
+        .navTo("RouteHandlingUnitItems", {
+          deliveryNumber: this.getOwnerComponent()
+            .getModel("appModel")
+            .getProperty("/deliveryNumber"),
+          handlingUnitNumber: encodeURIComponent(sHandlingUnitNumber),
+        });
+    },
   });
 });

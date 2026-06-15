@@ -1,0 +1,72 @@
+<mvc:View controllerName="hupackingfiori.controller.HandlingUnitItem"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page id="huItemsPage"
+        title="Handling Unit Items"
+        showNavButton="true"
+        navButtonPress=".onBack">
+
+        <subHeader>
+            <Bar>
+                <contentLeft>
+                    <Label text="HU: {ExternalHandlingUnitID}" design="Bold" class="sapUiSmallMarginBegin" />
+                    <Label text="— {HandlingUnitDescription}" class="sapUiSmallMarginBegin" />
+                </contentLeft>
+                <contentRight>
+                    <ObjectStatus
+                        text="{= ${/to_Item}.length + ' Item(s)'}"
+                        state="Information"
+                        class="sapUiSmallMarginEnd" />
+                </contentRight>
+            </Bar>
+        </subHeader>
+
+        <content>
+            <List id="huItemsList"
+                items="{path: 'to_Item'}"
+                noDataText="No items found for this handling unit."
+                growing="true"
+                growingThreshold="20"
+                mode="None"
+                busyIndicatorDelay="0">
+
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Item List" level="H4" />
+                    </Toolbar>
+                </headerToolbar>
+
+                <items>
+                    <ObjectListItem
+                        title="{Material}"
+                        intro="Delivery {DeliveryNumber} — Item {DeliveryItem}"
+                        number="{Quantity}"
+                        numberUnit="{QuantityUnit}"
+                        type="Inactive">
+
+                        <attributes>
+                            <ObjectAttribute title="HU Item No." text="{HandlingUnitItemNumber}" />
+                        </attributes>
+
+                    </ObjectListItem>
+                </items>
+
+            </List>
+        </content>
+
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    text="Back"
+                    type="Default"
+                    icon="sap-icon://nav-back"
+                    press=".onBack" />
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+
+</mvc:View>
