@@ -27,7 +27,9 @@
         "uri": "/sap/opu/odata/sap/Z_UI_DELIVERY_O2/",
         "type": "OData",
         "settings": {
-          "annotations": ["Z_UI_DELIVERY_O2_VAN"],
+          "annotations": [
+            "Z_UI_DELIVERY_O2_VAN"
+          ],
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "2.0"
         }
@@ -99,17 +101,23 @@
         {
           "name": "RouteHome",
           "pattern": ":?query:",
-          "target": ["TargetHome"]
+          "target": [
+            "TargetHome"
+          ]
         },
         {
           "name": "RouteHandlingUnits",
           "pattern": "delivery/{deliveryNumber}",
-          "target": ["TargetHandlingUnits"]
+          "target": [
+            "TargetHandlingUnits"
+          ]
         },
         {
           "name": "RouteHandlingUnitItems",
           "pattern": "delivery/{deliveryNumber}/hu/{handlingUnitNumber}",
-          "target": ["TargetHandlingUnitItems"]
+          "target": [
+            "TargetHandlingUnitItems"
+          ]
         }
       ],
       "targets": {

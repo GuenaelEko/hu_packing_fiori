@@ -26,6 +26,9 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="z_ui_delivery_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType/Delete_mc">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType">
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
@@ -51,6 +54,9 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_z_ui_delivery.zc_outbound_deliveryType/to_HandlingUnit_oc">
+                <Annotation Term="UI.Hidden"/>
             </Annotations>
             <Annotations Target="cds_z_ui_delivery.zc_outbound_deliveryType">
                 <Annotation Term="UI.HeaderInfo">

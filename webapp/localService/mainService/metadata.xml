@@ -43,12 +43,13 @@
                 <Key>
                     <PropertyRef Name="HandlingUnitNumber"/>
                 </Key>
-                <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Internal HU number" sap:quickinfo="Internal Handling Unit Number"/>
+                <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Internal HU number" sap:quickinfo="Internal Handling Unit Number" sap:updatable="false"/>
                 <Property Name="ExternalHandlingUnitID" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Handling Unit" sap:quickinfo="External Handling Unit Identification"/>
                 <Property Name="HandlingUnitDescription" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="HU identification 2" sap:quickinfo="Handling Unit's 2nd External Identification"/>
-                <Property Name="PackagingMaterial" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Packaging Materials"/>
-                <Property Name="PackingObject" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Packing Object"/>
-                <Property Name="HUObject" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Object Key" sap:quickinfo="Key for Object to Which the Handling Unit is Assigned"/>
+                <Property Name="PackagingMaterial" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Packaging Materials" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PackingObject" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Packing Object" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="HUObject" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Object Key" sap:quickinfo="Key for Object to Which the Handling Unit is Assigned" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="GrossWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="WeightUnit" sap:label="Total Weight" sap:quickinfo="Total Weight of Handling Unit"/>
                 <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
                 <Property Name="Volume" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="VolumeUnit" sap:label="Total Volume" sap:quickinfo="Total Volume of Handling Unit"/>
@@ -75,7 +76,8 @@
                 <Key>
                     <PropertyRef Name="DeliveryNumber"/>
                 </Key>
-                <Property Name="DeliveryNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Delivery"/>
+                <Property Name="to_HandlingUnit_oc" Type="Edm.Boolean" sap:label="Dynamic CbA-Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Delivery" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="DeliveryType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Delivery Type"/>
                 <Property Name="ShipToParty" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ship-to Party"/>
                 <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Delivery Date"/>
@@ -357,7 +359,7 @@
                 <EntitySet Name="SAP__PDFHeaderSet" EntityType="cds_z_ui_delivery.SAP__PDFHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_z_ui_delivery.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_z_ui_delivery.SAP__ValueHelp" sap:content-version="1"/>
-                <EntitySet Name="zc_handling_units" EntityType="cds_z_ui_delivery.zc_handling_unitsType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="zc_handling_units" EntityType="cds_z_ui_delivery.zc_handling_unitsType" sap:updatable="false" sap:content-version="1" sap:deletable-path="Delete_mc"/>
                 <EntitySet Name="zc_handling_unit_item" EntityType="cds_z_ui_delivery.zc_handling_unit_itemType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="zc_outbound_delivery" EntityType="cds_z_ui_delivery.zc_outbound_deliveryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <AssociationSet Name="to_FooterSet" Association="cds_z_ui_delivery.to_Footer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
@@ -411,25 +413,16 @@
             <Annotations Target="cds_z_ui_delivery.zc_outbound_deliveryType/to_HandlingUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.Composition"/>
             </Annotations>
-            <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_unit_item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.NavigationRestrictions">
+            <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_units" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
                     <Record>
-                        <PropertyValue Property="RestrictedProperties">
+                        <PropertyValue Property="NonFilterableProperties">
                             <Collection>
-                                <Record>
-                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_HandlingUnit"/>
-                                    <PropertyValue Property="InsertRestrictions">
-                                        <Record>
-                                            <PropertyValue Property="Insertable" Bool="false"/>
-                                        </Record>
-                                    </PropertyValue>
-                                </Record>
+                                <PropertyPath>Delete_mc</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_units" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.NavigationRestrictions">
                     <Record>
                         <PropertyValue Property="RestrictedProperties">
@@ -454,8 +447,62 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Delete_mc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_outbound_delivery" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>to_HandlingUnit_oc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_HandlingUnit"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Path="to_HandlingUnit_oc"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>to_HandlingUnit_oc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType/HandlingUnitNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_unit_item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.NavigationRestrictions">
                     <Record>
                         <PropertyValue Property="RestrictedProperties">

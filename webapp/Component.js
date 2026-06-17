@@ -20,6 +20,7 @@ sap.ui.define(
         // Shared runtime model (holds the currently selected delivery's data)
         let oAppModel = new JSONModel({
           deliveryNumber: "",
+          hasSelection: false,
         });
         this.setModel(oAppModel, "appModel");
 

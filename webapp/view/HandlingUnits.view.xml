@@ -22,13 +22,30 @@
                 noDataText="No handling units found for this delivery."
                 growing="true"
                 growingThreshold="20"
-                mode="None"
-                busyIndicatorDelay="0">
+                mode="SingleSelectLeft"
+                busyIndicatorDelay="0"
+                selectionChange=".onSelectionChange">
 
                 <headerToolbar>
-                    <Toolbar>
+                    <OverflowToolbar>
                         <Title text="Handling Unit List" level="H4" />
-                    </Toolbar>
+                        <ToolbarSpacer />
+                        <Button 
+                            id="btnDelete"
+                            text="Delete"
+                            type="Negative"
+                            icon="sap-icon://delete"
+                            enabled="{appModel>/hasSelection}"
+                            press=".onDeleteHU"
+                        />
+                        <Button 
+                            id="btnCreate"
+                            text="Create HU"
+                            type="Emphasized"
+                            icon="sap-icon://add"
+                            press=".onCreateHU"
+                        />
+                    </OverflowToolbar>
                 </headerToolbar>
 
                 <items>
