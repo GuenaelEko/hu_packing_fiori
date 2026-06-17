@@ -24,7 +24,7 @@ server:
       afterMiddleware: fiori-tools-appreload
       configuration:
         flp:
-          theme: sap_horizon
+          theme: sap_fiori_3
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:

@@ -113,6 +113,13 @@
           ]
         },
         {
+          "name": "RouteCreateHandlingUnit",
+          "pattern": "delivery/{deliveryNumber}/createHU",
+          "target": [
+            "TargetCreateHandlingUnit"
+          ]
+        },
+        {
           "name": "RouteHandlingUnitItems",
           "pattern": "delivery/{deliveryNumber}/hu/{handlingUnitNumber}",
           "target": [
@@ -128,6 +135,10 @@
         "TargetHandlingUnits": {
           "id": "HandlingUnits",
           "name": "HandlingUnits"
+        },
+        "TargetCreateHandlingUnit": {
+          "id": "CreateHandlingUnit",
+          "name": "CreateHandlingUnit"
         },
         "TargetHandlingUnitItems": {
           "id": "HandlingUnitItem",

@@ -1,24 +1,6 @@
 sap.ui.define(
-  [
-    "sap/ui/core/mvc/Controller",
-    "sap/m/MessageBox",
-    "sap/m/MessageToast",
-    "sap/m/Dialog",
-    "sap/m/Button",
-    "sap/m/Label",
-    "sap/m/Input",
-    "sap/m/VBox",
-  ],
-  (
-    Controller,
-    MessageBox,
-    MessageToast,
-    Dialog,
-    Button,
-    Label,
-    Input,
-    VBox,
-  ) => {
+  ["sap/ui/core/mvc/Controller", "sap/m/MessageBox", "sap/m/MessageToast"],
+  (Controller, MessageBox, MessageToast) => {
     "use strict";
 
     return Controller.extend("hupackingfiori.controller.HandlingUnits", {
@@ -33,6 +15,8 @@ sap.ui.define(
         let sDeliveryNumber = decodeURIComponent(
           oEvent.getParameter("arguments").deliveryNumber,
         );
+
+        this._sDeliveryNumber = sDeliveryNumber;
 
         //Reset selection state
         this.getOwnerComponent()
@@ -73,130 +57,14 @@ sap.ui.define(
       },
 
       // ----------------------------------------------------------------
-      // CREATE
+      // CREATE (navigates to a dedicated screen)
       // ----------------------------------------------------------------
       onCreateHU() {
-        // Lazy-init dialog
-        if (!this._oCreateDialog) {
-          this._oCreateDialog = new Dialog({
-            title: "Create Handling Unit",
-            contentWidth: "400px",
-            content: new VBox({
-              renderType: "Bare",
-              items: [
-                new Label({ text: "Packaging Material", required: true }),
-                new Input({
-                  id: this.createId("inputPackagingMaterial"),
-                  placeholder: "e.g. CARTON",
-                  maxLength: 15,
-                }),
-                new Label({
-                  text: "HU Description",
-                }),
-                new Input({
-                  id: this.createId("inputHUDescription"),
-                  placeholder: "e.g. Pallet for delivery 1234567890",
-                  maxLength: 40,
-                }),
-              ],
-            }),
-            beginButton: new Button({
-              text: "Create",
-              type: "Emphasized",
-              press: this._onCreateConfirm.bind(this),
-            }),
-            endButton: new Button({
-              text: "Cancel",
-              press: () => this._oCreateDialog.close(),
-            }),
-            afterClose: () => {
-              // Reset input fields on close
-              let oMatInput = this.byId("inputPackagingMaterial");
-              if (oMatInput) {
-                oMatInput.setValue("");
-                oMatInput.setValueState("None");
-              }
-              let oDescInput = this.byId("inputHUDescription");
-              if (oDescInput) {
-                oDescInput.setValue("");
-              }
-            },
+        this.getOwnerComponent()
+          .getRouter()
+          .navTo("RouteCreateHandlingUnit", {
+            deliveryNumber: encodeURIComponent(this._sDeliveryNumber),
           });
-          this.getView().addDependent(this._oCreateDialog);
-        }
-        this._oCreateDialog.open();
-      },
-
-      _onCreateConfirm() {
-        let oMatInput = this.byId("inputPackagingMaterial");
-        let oDescInput = this.byId("inputHUDescription");
-
-        let sPackagingMaterial = (oMatInput.getValue() || "").trim();
-        let sHUDescription = (oDescInput.getValue() || "").trim();
-
-        if (!sPackagingMaterial) {
-          oMatInput.setValueState("Error");
-          oMatInput.setValueStateText("Packaging material is required");
-          return;
-        }
-        oMatInput.setValueState("None");
-
-        let sDeliveryNumber = this.getOwnerComponent()
-          .getModel("appModel")
-          .getProperty("/deliveryNumber");
-
-        let oODataModel = this.getOwnerComponent().getModel();
-
-        console.log(
-          "[onCreateHU] Submitting create for delivery:",
-          sDeliveryNumber,
-          "material:",
-          sPackagingMaterial,
-          "desc:",
-          sHUDescription,
-        );
-
-        // oODataModel.create() sends the POST immediately - no
-        // submitChanges() needed (that's only required for createEntry()).
-        oODataModel.create(
-          "/zc_outbound_delivery('" + sDeliveryNumber + "')/to_HandlingUnit",
-          {
-            PackagingMaterial: sPackagingMaterial,
-            HandlingUnitDescription: sHUDescription,
-            HUObject: sDeliveryNumber,
-          },
-          {
-            success: (oData, oResponse) => {
-              console.log("[onCreateHU] create() SUCCESS - oData:", oData);
-              console.log(
-                "[onCreateHU] create() SUCCESS - response:",
-                oResponse,
-              );
-              this._oCreateDialog.close();
-              MessageToast.show("Handling Unit created successfully.");
-              this.getView().getElementBinding().refresh();
-            },
-            error: (oError) => {
-              console.error("[onCreateHU] create() ERROR - raw:", oError);
-              console.error(
-                "[onCreateHU] create() ERROR - status:",
-                oError && oError.statusCode,
-              );
-              console.error(
-                "[onCreateHU] create() ERROR - responseText:",
-                oError && oError.responseText,
-              );
-              let sMsg = "Failed to create Handling Unit";
-              try {
-                let oResponse = JSON.parse(oError.responseText);
-                sMsg = oResponse.error?.message?.value || sMsg;
-              } catch (_) {
-                /* keep default */
-              }
-              MessageBox.error(sMsg);
-            },
-          },
-        );
       },
 
       // ----------------------------------------------------------------

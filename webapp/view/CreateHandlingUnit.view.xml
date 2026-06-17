@@ -1,0 +1,64 @@
+<mvc:View controllerName="hupackingfiori.controller.CreateHandlingUnit"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+
+    <Page id="createHUPage"
+        title="Create Handling Unit"
+        showNavButton="true"
+        navButtonPress=".onBack">
+
+        <content>
+            <f:SimpleForm
+                layout="ResponsiveGridLayout"
+                editable="true"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="2"
+                labelSpanS="12"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                class="sapuiResponsivePadding">
+
+                <f:content>
+                    <Label text="Packaging Material" />
+                    <Input
+                        id="inputPackagingMaterial"
+                        value="CARTON"
+                        width="35%"
+                        editable="false" />
+
+                    <Label text="HU Description" required="true" labelFor="inputHUDescription" />
+                    <Input
+                        id="inputHUDescription"
+                        placeholder="e.g. Pallet for delivery 1234567890"
+                        maxLength="40"
+                        width="35%"
+                        submit=".onCreate" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    text="Cancel"
+                    type="Default"
+                    press=".onBack" />
+                <Button
+                    text="Create"
+                    type="Emphasized"
+                    icon="sap-icon://add"
+                    press=".onCreate" />
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+
+</mvc:View>
