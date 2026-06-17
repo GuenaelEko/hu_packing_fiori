@@ -47,9 +47,9 @@
                 <Property Name="HandlingUnitNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Internal HU number" sap:quickinfo="Internal Handling Unit Number" sap:updatable="false"/>
                 <Property Name="ExternalHandlingUnitID" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Handling Unit" sap:quickinfo="External Handling Unit Identification"/>
                 <Property Name="HandlingUnitDescription" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="HU identification 2" sap:quickinfo="Handling Unit's 2nd External Identification"/>
-                <Property Name="PackagingMaterial" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Packaging Materials" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PackagingMaterial" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Packaging Materials" sap:updatable="false"/>
                 <Property Name="PackingObject" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Packing Object" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="HUObject" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Object Key" sap:quickinfo="Key for Object to Which the Handling Unit is Assigned" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="HUObject" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Object Key" sap:quickinfo="Key for Object to Which the Handling Unit is Assigned" sap:updatable="false"/>
                 <Property Name="GrossWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="WeightUnit" sap:label="Total Weight" sap:quickinfo="Total Weight of Handling Unit"/>
                 <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
                 <Property Name="Volume" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="VolumeUnit" sap:label="Total Volume" sap:quickinfo="Total Volume of Handling Unit"/>
@@ -499,7 +499,13 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType/HUObject" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
             <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType/HandlingUnitNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_z_ui_delivery.zc_handling_unitsType/PackagingMaterial" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.Immutable"/>
             </Annotations>
             <Annotations Target="cds_z_ui_delivery.cds_z_ui_delivery_Entities/zc_handling_unit_item" xmlns="http://docs.oasis-open.org/odata/ns/edm">

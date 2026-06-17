@@ -54,7 +54,7 @@ sap.ui.define(
         this.byId("createHUPage").setBusy(true);
 
         oODataModel.create(
-          "/zc_outbound_delivery('" + sDeliveryNumber + "')/to_HandlingUnit",
+          "/zc_handling_units",
           {
             PackagingMaterial: sPackagingMaterial,
             HandlingUnitDescription: sHUDescription,
